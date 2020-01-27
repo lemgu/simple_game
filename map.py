@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 
+import monster
+import process
+
+
 class Map(object):
 	
 	def monster_room(self,hero):
+	
+		
 	
 		room_type = "monster_room"
 		
