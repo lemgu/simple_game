@@ -16,7 +16,7 @@ class Process(object):
 		
 	def manadestory():
 
-		destory = self.attri[u"法力值"] * 2
+		destory = -(self.attri[u"法力值"] * 2)
 		
 		return destory
 	

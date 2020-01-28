@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import map
+import hero
 import utif
 import process
 import attribute
@@ -15,16 +16,14 @@ class Engine(object):
 	
 	def game_run(self):
 		
-		hero1 = attribute.Attribute().attri()	#创建人物
+		hero1 = hero.Hero_random().attribute()	#创建人物
 		
 		print u"你的人物初始属性是："
 		# print json.dumps(hero1,encoding = 'utf-8',ensure_ascii = False) #josn.dumps（）将字典dicts转化为字符串string，于是可以顺利输出。但是这种方法不够好（字典无序，故输出无序，所以我采用下面的方法）
 		
-		utif.utility_function().print_attri(hero1)	#输出人物的属性
+		utif.Print_attribute().pri(hero1)	#输出人物的属性
 		
 		next = map.Map().monster_room()
-		
-
 		
 		for num in the_count:
 			
