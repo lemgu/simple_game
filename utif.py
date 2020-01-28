@@ -3,8 +3,10 @@
 #工具函数
 
 from random import randint
+import process
 import monster
 import inspect	#inspect 模块用于等会用于查找文件中的类
+from sys import exit
 
 
 class Choose_monster(object):
@@ -38,11 +40,11 @@ class Print_attribute(object):
 
 	def __init__(self,attri):
 	
-		self.blood = attri["血量"]
-		self.mana = attri["法力值"]
-		self.strength = attri["力量"]
-		self.money = attri["金币"]
-		self.camp = attri["阵营"]
+		self.blood = attri[u"血量"]
+		self.mana = attri[u"法力值"]
+		self.strength = attri[u"力量"]
+		self.money = attri[u"金币"]
+		self.camp = attri[u"阵营"]
 		
 	def pri(self):
 		
@@ -55,7 +57,7 @@ class Print_attribute(object):
 			print u"对方的属性值为：{| 血量:%d | 法力值:%d | 力量:%d | 金币:%d |}" %(self.blood,self.mana,self.strength,self.money)
 			
 			
-class Choose_process(objcet):
+class Choose_process(object):
 	
 	"""生物选择其行动，并输出被影响者的作用后属性"""
 	
@@ -74,16 +76,16 @@ class Choose_process(objcet):
 	
 		if option == 1:
 			
-			kill = process.Process(self.ing).attack
-			self.ed["血量"] = self.ed["血量"] + kill
+			kill = process.Process(self.ing).attack()
+			self.ed[u"血量"] = self.ed[u"血量"] + kill
 			
 			return self.ed	#注意，这里只返回了被作用者的属性，因为施加动作的生物属性值是没变的，故不需要返回
 			
 			
 		elif option == 2:
 		
-			destory = process.Process(self.ing).manadestory
-			self.ed["血量"] = self.ed["血量"] + destory
+			destory = process.Process(self.ing).manadestory()
+			self.ed[u"血量"] = self.ed[u"血量"] + destory
 			
 			return self.ed	#注意，这里只返回了被作用者的属性，因为施加动作的生物属性值是没变的，故不需要返回
 		
@@ -105,11 +107,77 @@ class Choose_process(objcet):
 	def specific_choose(self):
 	
 		self.print_choice()
-		
-		choose = raw_input(">你的选择是？（输入对应数字）：".decode('utf-8').encode('gbk'))
+		print "\n"
+		choose = int(raw_input(">你的选择是？（输入对应数字）：".decode('utf-8').encode('gbk')))
 		
 		return self.move(choose)	#直接把被作用者被作用后的属性值传递出去，此处在引用该函数时，应当赋值给被作用者（全局变量）	
-
 		
+class dead(object):
+
+	"""根据对应阵营，输出死亡结果"""
+
+	def __init__(self):
+	
+		pass
+		
+	def death(self,camp):
+	
+		if	camp == 0:
+	
+			print u"你死了" 
+			
+			exit(0)
+			
+		elif camp == 1:
+		
+			print u"对方死了"
+			
+			return "win"
+
+class State_judgement(object):
+
+	"""判断生物状态属性（暂为只判断是否死亡）,并作出应有回应"""
+	
+	def __init__(self,attri):	#dict为生物的属性
+		
+		self.blood = attri[u"血量"]
+		self.mana = attri[u"法力值"]
+		self.strength = attri[u"力量"]
+		self.money = attri[u"金币"]
+		self.camp = attri[u"阵营"]
+		
+	def judge(self):
+	
+		if self.blood <= 0:
+		
+			return dead().death(self.camp)
+			
+			
+			
+			
+			
+			
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 		
