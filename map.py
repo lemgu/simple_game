@@ -23,8 +23,12 @@ class Map(object):
 			
 			print "-"*50
 			
-			monster = utif.Choose_process(hero,monster).specific_choose()	#英雄发起动作,Choose_process(ing,ed）第一个为施加动作的人，第二个为被受到影响的人。这个函数返回的是被影响的人的属性，故赋值给monster
-			
+			dict,identifier = utif.Choose_process(hero,monster).specific_choose()	#英雄发起动作,Choose_process(ing,ed）第一个为施加动作的人，第二个为被受到影响的人。这个函数返回的是（属性,返回属性的阵营标识identifier），故根据阵营标识判断返回的属性该赋予给谁
+			if identifier == 3:	#identifier的2代表动作施加者，dientifier的3代表动作的承受者
+				monster = dict
+			elif identifier == 2:
+				hero = dict			
+				
 			print "\n"
 			print "-"*50
 			print u"结果如下："
@@ -38,9 +42,13 @@ class Map(object):
 			if wol == "win":
 				break	#判断怪物和英雄的状态，若英雄死亡则输出结果，若怪物死亡则退出循环
 			
-
-			hero = utif.Choose_process(monster,hero).random_choose()	#怪物发起随机动作
-
+			dict,identifier = utif.Choose_process(monster,hero).random_choose()	#怪物发起随机动作
+			
+			
+			if identifier == 2:
+				monster = dict
+			elif identifier == 3:
+				hero = dict
 			
 			print "\n"
 			print "-"*50

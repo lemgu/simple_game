@@ -2,20 +2,21 @@
 
 class a(object):
 	
-	def __init__(self,dict):
+	def __init__(self):
 	
-		self.dict = dict
+		pass
 		
-	def change(self):
+	def change(self,a,b):
 	
-		self.dict = [0,1,2,3]
+		c = a + b
 		
-		return self.dict
+		return c,114514
 		
-dic = [51,23,13,8]
-
-test = a(dic).change()
-
-print dic
+test = a().change(10,5)
 
 print test
+
+s,b = test
+print s
+print b
+

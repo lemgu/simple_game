@@ -75,33 +75,56 @@ class Choose_process(object):
 	def move(self,option):	
 	
 		if option == 1:
-			
+					
 			kill = process.Process(self.ing).attack()
 			self.ed[u"血量"] = self.ed[u"血量"] + kill
 			
-			return self.ed	#注意，这里只返回了被作用者的属性，因为施加动作的生物属性值是没变的，故不需要返回
+			return self.ed,3	#前面的为返回了被作用者的属性，后面的为返回属性值的归属标识（3为承受者，2为施加者）
 			
 			
 		elif option == 2:
-		
+				
 			destory = process.Process(self.ing).manadestory()
 			self.ed[u"血量"] = self.ed[u"血量"] + destory
 			
-			return self.ed	#注意，这里只返回了被作用者的属性，因为施加动作的生物属性值是没变的，故不需要返回
+			return self.ed,3	
 		
 		elif option == 3:
+					
+			armor = process.Process(self.ing).define()
+			self.ing[u"血量"] = self.ing[u"血量"] + armor
 			
-			print u"还没做好"
+			return self.ing,2
 		
 		elif option == 4:
 		
-			print u"还没做好"
+			final = process.Process(self.ing).run()
+			
+			if final == "success":
+			
+				self.ed[u"血量"] = 0
+				
+				print "\n"
+				print u"**************************************"
+				print u"*************逃跑成功*****************"
+				print u"**************************************"
+				
+				
+			elif final == "fail":
+				
+				print "\n"
+				print u"**************************************"
+				print u"*************逃跑失败*****************"
+				print u"**************************************"
+				
+			return self.ed,3
+			
 			
 	#---------------------------------两种选择行为的方式----------------------------------------------------------------
 		
 	def random_choose(self):
 	
-		dice = randint(1,2)		
+		dice = randint(1,3)		
 		return self.move(dice)	#直接把被作用者被作用后的属性值传递出去，此处在引用该函数时，应当赋值给被作用者（全局变量）		
 	
 	def specific_choose(self):
@@ -124,13 +147,13 @@ class dead(object):
 	
 		if	camp == 0:
 	
-			print u"你死了" 
+			print u"【你死了】" 
 			
 			exit(0)
 			
 		elif camp == 1:
 		
-			print u"对方死了"
+			print u"))))))))))))))))))))))【对方死了】((((((((((((((((((((((((((((((("
 			
 			return "win"
 

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+
+
 import attribute
 
 class Hero_random(object):
